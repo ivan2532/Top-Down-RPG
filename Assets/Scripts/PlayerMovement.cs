@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         myRigidbody = GetComponent<Rigidbody>();
-        myAnimator = GetComponent<Animator>();
+        myAnimator = GetComponentInChildren<Animator>();
 
         CalculateAxes();
     }
