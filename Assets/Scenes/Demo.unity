@@ -1605,7 +1605,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 560968629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b186f5d09a646ba4faf61ded6e1920bf, type: 3}
+  m_Script: {fileID: 11500000, guid: 59ffd942427c7cd4abd318f837315fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   zoomSensitivity: 0.3
