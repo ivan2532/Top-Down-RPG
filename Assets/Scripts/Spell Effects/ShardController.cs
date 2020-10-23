@@ -21,7 +21,10 @@ public class ShardController : MonoBehaviour
 
     private void Update()
     {
-        transform.localScale = Vector3.SmoothDamp(transform.localScale, new Vector3(targetScale, targetScale, targetScale * 1.8f), ref scaleSmoothness, scaleSmoothAmount);
+        transform.localScale = Vector3.SmoothDamp(transform.localScale, 
+            new Vector3(targetScale, targetScale, targetScale * 1.8f), 
+            ref scaleSmoothness, scaleSmoothAmount);
+
         transform.rotation = SmoothDampUtility.QuaternionSmoothDamp(transform.rotation, targetRotation, ref rotationSmoothness, rotationSmoothAmount);
     }
 
