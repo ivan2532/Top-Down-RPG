@@ -5,6 +5,8 @@ public class VirtualCameraZoomController : MonoBehaviour
 {
     [SerializeField] private float zoomSensitivity = 0.5f;
     [SerializeField] private float zoomSmoothness = 0.1f;
+    [SerializeField] private float startOrthographicSize = 5.0f;
+
     [SerializeField] private float minOrthographicSize = 2f;
     [SerializeField] private float maxOrthographicSize = 7f;
 
@@ -17,7 +19,8 @@ public class VirtualCameraZoomController : MonoBehaviour
     private void Start()
     {
         virtualCamera = GetComponent<CinemachineVirtualCamera>();
-        newOrthographicSize = virtualCamera.m_Lens.OrthographicSize;
+        virtualCamera.m_Lens.OrthographicSize = startOrthographicSize;
+        newOrthographicSize = startOrthographicSize;
     }
 
     private void Update()
