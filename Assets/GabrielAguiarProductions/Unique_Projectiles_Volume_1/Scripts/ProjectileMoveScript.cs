@@ -99,7 +99,7 @@ public class ProjectileMoveScript : MonoBehaviour {
 					Destroy (hitVFX, ps.main.duration);
 			}
 
-			StartCoroutine (DestroyParticle (0f));
+			StartCoroutine (DestroyParticle (5.0f));
 		}
 	}
 
@@ -122,7 +122,8 @@ public class ProjectileMoveScript : MonoBehaviour {
 		}
 		
 		yield return new WaitForSeconds (waitTime);
-		Destroy (gameObject);
+		//Destroy (gameObject);
+		gameObject.SetActive(false);
 	}
 
 

@@ -8,6 +8,10 @@ public class IcemanController : MonoBehaviour
 
     [SerializeField] private Transform spellSpawnTransform;
     [SerializeField] private GameObject frostboltPrefab;
+    
+    private const int frostboltPoolSize = 5;
+
+    private GameObject[] frostboltPool;
 
     private float inputX, inputY;
 
@@ -37,7 +41,39 @@ public class IcemanController : MonoBehaviour
 
         lastPosition = transform.position;
 
+        FrostBoltPoolInit();
+
         CalculateAxes();
+    }
+
+    private void FrostBoltPoolInit()
+    {
+        frostboltPool = new GameObject[frostboltPoolSize];
+        var poolParent = new GameObject("Frostbolt Pool Parent").transform;
+
+        for (int i = 0; i < frostboltPool.Length; ++i)
+        {
+            frostboltPool[i] = Instantiate(frostboltPrefab);
+            frostboltPool[i].SetActive(false);
+            frostboltPool[i].transform.SetParent(poolParent);
+        }
+    }
+
+    private GameObject GetNextFrostBolt()
+    {
+        foreach (var frostbolt in frostboltPool)
+            if (!frostbolt.activeInHierarchy) 
+                return frostbolt;
+
+        Debug.LogError("Pool size is too small!");
+        Debug.Break();
+        return null;
+    }
+
+    private IEnumerator DisableFrostbolt(GameObject frostbolt)
+    {
+        yield return new WaitForSeconds(5);
+        frostbolt.SetActive(false);
     }
 
     private void Update()
@@ -102,7 +138,12 @@ public class IcemanController : MonoBehaviour
     //Called by animation event
     public void SpawnFrostbolt()
     {
-        Transform frostboltTransform = Instantiate(frostboltPrefab).transform;
+        var frostbolt = GetNextFrostBolt();
+
+        frostbolt.SetActive(true);
+        StartCoroutine(DisableFrostbolt(frostbolt));
+
+        var frostboltTransform = frostbolt.transform;
         frostboltTransform.rotation = transform.rotation;
         frostboltTransform.position = spellSpawnTransform.position;
     }

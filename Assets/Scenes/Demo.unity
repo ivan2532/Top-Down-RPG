@@ -1608,11 +1608,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ffd942427c7cd4abd318f837315fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomSensitivity: 0.5
-  zoomSmoothness: 0.1
-  startOrthographicSize: 5
-  minOrthographicSize: 2
-  maxOrthographicSize: 7
 --- !u!1001 &588150022
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6083,6 +6078,10 @@ PrefabInstance:
       propertyPath: spellSpawnTransform
       value: 
       objectReference: {fileID: 8659654452515436740}
+    - target: {fileID: 3105004441357719964, guid: d7fa0f8c6ec077448b9767c2f7717635, type: 3}
+      propertyPath: frostboltPoolSize
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3105004441357719967, guid: d7fa0f8c6ec077448b9767c2f7717635, type: 3}
       propertyPath: m_Name
       value: Player
