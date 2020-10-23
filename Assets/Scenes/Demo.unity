@@ -1543,6 +1543,7 @@ GameObject:
   m_Component:
   - component: {fileID: 560968631}
   - component: {fileID: 560968630}
+  - component: {fileID: 560968632}
   m_Layer: 0
   m_Name: vcam Main
   m_TagString: Untagged
@@ -1600,6 +1601,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 40, y: -45, z: 0}
+--- !u!114 &560968632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560968629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b186f5d09a646ba4faf61ded6e1920bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomSensitivity: 0.3
+  minOrthographicSize: 2
+  maxOrthographicSize: 7
 --- !u!1001 &588150022
 PrefabInstance:
   m_ObjectHideFlags: 0
