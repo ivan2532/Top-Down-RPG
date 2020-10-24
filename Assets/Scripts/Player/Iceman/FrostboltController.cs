@@ -27,6 +27,9 @@ public class FrostboltController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (!gameObject.activeInHierarchy)
+            return;
+
         var frostbollHitEffect = icemanController.GetNextFrostHitEffectBolt();
         var contant = collision.GetContact(0);
         frostbollHitEffect.transform.position = contant.point + contant.normal * 0.5f;
