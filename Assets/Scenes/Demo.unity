@@ -1608,6 +1608,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ffd942427c7cd4abd318f837315fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zoomSensitivity: 0.5
+  zoomSmoothness: 0.1
+  startOrthographicSize: 5
+  minOrthographicSize: 2
+  maxOrthographicSize: 7
 --- !u!1001 &588150022
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6073,7 +6078,7 @@ PrefabInstance:
     - target: {fileID: 3105004441357719964, guid: d7fa0f8c6ec077448b9767c2f7717635, type: 3}
       propertyPath: frostboltPrefab
       value: 
-      objectReference: {fileID: 1374267004960804, guid: 10a196906512b5141bfd56285ee6c562, type: 3}
+      objectReference: {fileID: 1733382265267045154, guid: 194b96c24856a1d49814d486b928a05e, type: 3}
     - target: {fileID: 3105004441357719964, guid: d7fa0f8c6ec077448b9767c2f7717635, type: 3}
       propertyPath: spellSpawnTransform
       value: 

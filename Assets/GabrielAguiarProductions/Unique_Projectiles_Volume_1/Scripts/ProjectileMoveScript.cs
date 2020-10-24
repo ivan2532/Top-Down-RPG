@@ -99,7 +99,7 @@ public class ProjectileMoveScript : MonoBehaviour {
 					Destroy (hitVFX, ps.main.duration);
 			}
 
-			StartCoroutine (DestroyParticle (5.0f));
+			StartCoroutine (DestroyParticle (0.0f));
 		}
 	}
 
