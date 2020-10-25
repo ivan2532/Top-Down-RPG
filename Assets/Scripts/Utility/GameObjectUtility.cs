@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Utility
+public class GameObjectUtility
 {
     public static IEnumerator DisableGameObjectDelayed(GameObject targetObject, float duration)
     {
