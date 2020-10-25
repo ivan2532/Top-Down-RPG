@@ -3,105 +3,61 @@
 [RequireComponent(typeof(Rigidbody))]
 public class FrostboltController : MonoBehaviour
 {
-    private const float disableWaitTime = 5.0f;
+    private const float disableWaitTime = 3.0f;
 
     [SerializeField] private float frostboltSpeed = 5.0f;
-    [field: SerializeField] public GameObject HitEffectPrefab { get; private set; }
-    [SerializeField] private GameObject frostboltPrefab;
-    [SerializeField] private Transform spellSpawnTransform;
+    [SerializeField] private GameObject hitEffect;
 
     private const int frostboltPoolSize = 5;
+    private const string frostboltPrefabPath = "Spell Effects/Frostbolt Projectile";
 
-    private GameObject[] frostboltPool;
-    private GameObject[] frostboltHitEffectPool;
-
+    private static ObjectPool frostboltPool = new ObjectPool();
 
     private Rigidbody myRigidbody;
 
-    private void Awake()
+    [RuntimeInitializeOnLoadMethod]
+    private static void OnRuntimeMethodLoad()
     {
-        myRigidbody = GetComponent<Rigidbody>();
-        FrostboltPoolInit();
+        frostboltPool.InitializePool(frostboltPoolSize, Resources.Load<GameObject>(frostboltPrefabPath), "Frostbolt Pool");
     }
 
-    private void OnEnable()
+    public static void SpawnFrostbolt(Vector3 spawnPosition, Quaternion spawnRotation)
     {
-        Invoke("DisableFrostbolt", disableWaitTime);
-        myRigidbody.velocity = transform.forward * frostboltSpeed;
-    }
-
-    private void FrostboltPoolInit()
-    {
-        frostboltPool = new GameObject[frostboltPoolSize];
-        var frostboltPoolParent = new GameObject("Frostbolt Pool Parent").transform;
-
-        for (int i = 0; i < frostboltPool.Length; ++i)
-        {
-            frostboltPool[i] = Instantiate(frostboltPrefab);
-            frostboltPool[i].SetActive(false);
-            frostboltPool[i].transform.SetParent(frostboltPoolParent);
-        }
-
-        frostboltHitEffectPool = new GameObject[frostboltPoolSize];
-        var frostboltHitEffectPoolParent = new GameObject("Frostbolt Hit Effect Pool Parent").transform;
-
-        for (int i = 0; i < frostboltPool.Length; ++i)
-        {
-            frostboltHitEffectPool[i] = Instantiate(frostboltPrefab.GetComponent<FrostboltController>().HitEffectPrefab);
-            frostboltHitEffectPool[i].SetActive(false);
-            frostboltHitEffectPool[i].transform.SetParent(frostboltHitEffectPoolParent);
-        }
-    }
-
-    private void DisableFrostbolt() => gameObject.SetActive(false);
-
-    //Called by animation event
-    public void SpawnFrostbolt()
-    {
-        var frostbolt = GetNextFrostbolt();
-
+        var frostbolt = frostboltPool.GetNextObjectFromPool();
         var frostboltTransform = frostbolt.transform;
 
-        frostboltTransform.rotation = transform.rotation;
-        frostboltTransform.position = spellSpawnTransform.position;
+        frostboltTransform.position = spawnPosition;
+        frostboltTransform.rotation = spawnRotation;
 
         frostbolt.SetActive(true);
     }
 
-    //Called by animation event
-    public void EndFrostboltCast() => casting = false;
-
-    public GameObject GetNextFrostbolt()
+    private void Awake()
     {
-        foreach (var frostbolt in frostboltPool)
-            if (!frostbolt.activeInHierarchy)
-                return frostbolt;
-
-        Debug.LogError("Pool size is too small!");
-        Debug.Break();
-        return null;
+        myRigidbody = GetComponent<Rigidbody>();
+        hitEffect.transform.SetParent(null);
     }
 
-    public GameObject GetNextFrostHitEffectBolt()
+    private void OnEnable()
     {
-        foreach (var frostboltHitEffect in frostboltHitEffectPool)
-            if (!frostboltHitEffect.activeInHierarchy)
-                return frostboltHitEffect;
-
-        Debug.LogError("Pool size is too small!");
-        Debug.Break();
-        return null;
+        CancelInvoke("DisableFrostbolt");
+        Invoke("DisableFrostbolt", disableWaitTime);
+        myRigidbody.velocity = transform.forward * frostboltSpeed;
     }
+
+    private void DisableFrostbolt() => gameObject.SetActive(false);
 
     private void OnCollisionEnter(Collision collision)
     {
         if (!gameObject.activeInHierarchy)
             return;
 
-        var frostboltHitEffect = GetNextFrostHitEffectBolt();
         var contact = collision.GetContact(0);
-        frostboltHitEffect.transform.position = contact.point + contact.normal * 0.5f;
-        frostboltHitEffect.SetActive(true);
+        hitEffect.transform.position = contact.point + contact.normal * 0.5f;
+
+        //Reset particle effect
+        hitEffect.SetActive(false);
+        hitEffect.SetActive(true);
 
         gameObject.SetActive(false);
         CancelInvoke("DisableFrostbolt");

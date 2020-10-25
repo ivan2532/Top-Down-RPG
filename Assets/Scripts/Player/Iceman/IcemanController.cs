@@ -4,6 +4,7 @@ using UnityEngine.Rendering;
 [RequireComponent(typeof(Rigidbody))]
 public class IcemanController : MonoBehaviour
 {
+    [SerializeField] private Transform spellSpawnTransform;
     [SerializeField] private float movementSpeed = 5.0f;
 
     private bool _casting = false;
@@ -53,12 +54,21 @@ public class IcemanController : MonoBehaviour
     }
     #endregion
 
+    #region Animation Events
+    public void SpawnFrostbolt()
+    {
+        FrostboltController.SpawnFrostbolt(spellSpawnTransform.position, transform.rotation);
+    }
+
+    public void EndFrostboltCast()  => _casting = false;
+    #endregion
+
     private void PlayerMovement()
     {
         _currentSpeed = (transform.position - _lastPosition).sqrMagnitude;
         _lastPosition = transform.position;
 
-        Vector3 movementInput = /*something.casting*/true ? Vector3.zero : new Vector3(_inputX, 0.0f, _inputY).normalized * movementSpeed;
+        Vector3 movementInput = _casting ? Vector3.zero : new Vector3(_inputX, 0.0f, _inputY).normalized * movementSpeed;
         _rigidBody.velocity = _forwardDirection * movementInput.z + _rightDirection * movementInput.x + new Vector3(0.0f, _rigidBody.velocity.y);
         _animator.SetFloat("Speed", _currentSpeed / 0.01f);
 

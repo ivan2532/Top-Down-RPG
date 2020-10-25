@@ -9723,6 +9723,7 @@ Transform:
   - {fileID: 1736964729950354786}
   - {fileID: 1731023503543776484}
   - {fileID: 1737146733071199900}
+  - {fileID: 3102275163544177237}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14620,7 +14621,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frostboltSpeed: 10
-  <HitEffectPrefab>k__BackingField: {fileID: 877024326055831615, guid: 91270e3e7c19e4d4f9ef07ebf369d6b3, type: 3}
+  hitEffect: {fileID: 3099721087066155013}
+  spellSpawnTransform: {fileID: 0}
 --- !u!65 &6002202183792933782
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19647,3 +19649,74 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 1
   m_Emitting: 1
+--- !u!1001 &2823681226973544506
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1730544299459023136}
+    m_Modifications:
+    - target: {fileID: 874478768669051503, guid: 91270e3e7c19e4d4f9ef07ebf369d6b3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 874478768669051503, guid: 91270e3e7c19e4d4f9ef07ebf369d6b3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 874478768669051503, guid: 91270e3e7c19e4d4f9ef07ebf369d6b3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 874478768669051503, guid: 91270e3e7c19e4d4f9ef07ebf369d6b3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 874478768669051503, guid: 91270e3e7c19e4d4f9ef07ebf369d6b3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 874478768669051503, guid: 91270e3e7c19e4d4f9ef07ebf369d6b3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 874478768669051503, guid: 91270e3e7c19e4d4f9ef07ebf369d6b3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 874478768669051503, guid: 91270e3e7c19e4d4f9ef07ebf369d6b3, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 874478768669051503, guid: 91270e3e7c19e4d4f9ef07ebf369d6b3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 874478768669051503, guid: 91270e3e7c19e4d4f9ef07ebf369d6b3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 874478768669051503, guid: 91270e3e7c19e4d4f9ef07ebf369d6b3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 877024326055831615, guid: 91270e3e7c19e4d4f9ef07ebf369d6b3, type: 3}
+      propertyPath: m_Name
+      value: Frostbolt Hit Effect
+      objectReference: {fileID: 0}
+    - target: {fileID: 877024326055831615, guid: 91270e3e7c19e4d4f9ef07ebf369d6b3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 91270e3e7c19e4d4f9ef07ebf369d6b3, type: 3}
+--- !u!1 &3099721087066155013 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 877024326055831615, guid: 91270e3e7c19e4d4f9ef07ebf369d6b3, type: 3}
+  m_PrefabInstance: {fileID: 2823681226973544506}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3102275163544177237 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 874478768669051503, guid: 91270e3e7c19e4d4f9ef07ebf369d6b3, type: 3}
+  m_PrefabInstance: {fileID: 2823681226973544506}
+  m_PrefabAsset: {fileID: 0}
