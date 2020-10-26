@@ -8,29 +8,7 @@ public class FrostboltController : MonoBehaviour
     [SerializeField] private float frostboltSpeed = 5.0f;
     [SerializeField] private GameObject hitEffect;
 
-    private const int frostboltPoolSize = 5;
-    private const string frostboltPrefabPath = "Spell Effects/Frostbolt Projectile";
-
-    private static ObjectPool frostboltPool = new ObjectPool();
-
     private Rigidbody myRigidbody;
-
-    [RuntimeInitializeOnLoadMethod]
-    private static void OnRuntimeMethodLoad()
-    {
-        frostboltPool.InitializePool(frostboltPoolSize, Resources.Load<GameObject>(frostboltPrefabPath), "Frostbolt Pool");
-    }
-
-    public static void SpawnFrostbolt(Vector3 spawnPosition, Quaternion spawnRotation)
-    {
-        var frostbolt = frostboltPool.GetNextObjectFromPool();
-        var frostboltTransform = frostbolt.transform;
-
-        frostboltTransform.position = spawnPosition;
-        frostboltTransform.rotation = spawnRotation;
-
-        frostbolt.SetActive(true);
-    }
 
     private void Awake()
     {

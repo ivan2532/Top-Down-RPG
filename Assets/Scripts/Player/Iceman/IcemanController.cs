@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Player.Iceman;
+using UnityEngine;
 using UnityEngine.Rendering;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -57,7 +58,7 @@ public class IcemanController : MonoBehaviour
     #region Animation Events
     public void SpawnFrostbolt()
     {
-        FrostboltController.SpawnFrostbolt(spellSpawnTransform.position, transform.rotation);
+        IcemanSpellManager.SpawnFrostbolt(spellSpawnTransform.position, transform.rotation);
     }
 
     public void EndFrostboltCast()  => _casting = false;
