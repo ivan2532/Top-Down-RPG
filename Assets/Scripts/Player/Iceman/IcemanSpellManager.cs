@@ -15,13 +15,13 @@ namespace Assets.Scripts.Player.Iceman
             frostboltPool.InitializePool(frostboltPoolSize, Resources.Load<GameObject>(frostboltPrefabPath), "Frostbolt Pool");
         }
 
-        public static void SpawnFrostbolt(Vector3 spawnPosition, Quaternion spawnRotation)
+        public static void SpawnFrostbolt(Vector3 spawnPosition, Vector3 targetPoint)
         {
             var frostbolt = frostboltPool.GetNextObjectFromPool();
             var frostboltTransform = frostbolt.transform;
 
             frostboltTransform.position = spawnPosition;
-            frostboltTransform.rotation = spawnRotation;
+            frostboltTransform.rotation = Quaternion.LookRotation(targetPoint - spawnPosition);
 
             frostbolt.SetActive(true);
         }

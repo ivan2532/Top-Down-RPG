@@ -26,6 +26,8 @@ public class IcemanController : MonoBehaviour
     #region Component refrences
     private Rigidbody _rigidBody;
     private Animator _animator;
+    private Vector3 _targetPoint;
+
     #endregion
 
     #region MonoBehaviour Events
@@ -58,7 +60,7 @@ public class IcemanController : MonoBehaviour
     #region Animation Events
     public void SpawnFrostbolt()
     {
-        IcemanSpellManager.SpawnFrostbolt(spellSpawnTransform.position, transform.rotation);
+        IcemanSpellManager.SpawnFrostbolt(spellSpawnTransform.position, _targetPoint);
     }
 
     public void EndFrostboltCast()  => _casting = false;
@@ -107,8 +109,8 @@ public class IcemanController : MonoBehaviour
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (playerXZPlane.Raycast(ray, out float distance))
         {
-            var hitPoint = ray.GetPoint(distance);
-            _targetRotation = Quaternion.LookRotation(hitPoint - transform.position);
+            _targetPoint = ray.GetPoint(distance);
+            _targetRotation = Quaternion.LookRotation(_targetPoint - transform.position);
         }
     }
 
