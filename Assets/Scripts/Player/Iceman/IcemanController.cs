@@ -1,12 +1,10 @@
 ﻿using System.Linq;
 using Assets.Scripts.Player.Iceman;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 [RequireComponent(typeof(Rigidbody))]
 public class IcemanController : MonoBehaviour
 {
-    [SerializeField] private Transform spellSpawnTransform;
     [SerializeField] private float movementSpeed = 5.0f;
 
     private bool _casting = false;
@@ -20,7 +18,7 @@ public class IcemanController : MonoBehaviour
     private float _currentSpeed = 0.0f;
     private Vector3 _lastPosition;
 
-    private Ray _cameraToPointerRay;
+    private Vector3 _targetPoint;
     private Quaternion _targetRotation;
     private Quaternion _rotationSmoothVelocity;
     #endregion
@@ -36,6 +34,9 @@ public class IcemanController : MonoBehaviour
     {
         _rigidBody = GetComponent<Rigidbody>();
         _animator = GetComponentInChildren<Animator>();
+        _spineTransform = transform
+            .GetComponentsInChildren<Transform>()
+            .Single(t => t.name == "mixamorig:Spine");
     }
 
     private void Start()
@@ -61,7 +62,7 @@ public class IcemanController : MonoBehaviour
     #region Animation Events
     public void SpawnFrostbolt()
     {
-        IcemanSpellManager.SpawnFrostbolt(_spineTransform.position, _cameraToPointerRay);
+        IcemanSpellManager.SpawnFrostbolt(_spineTransform.position, _targetPoint);
     }
 
     public void EndFrostboltCast()  => _casting = false;
@@ -106,17 +107,13 @@ public class IcemanController : MonoBehaviour
 
     private void SetPlayerTargetRotation()
     {
-        _spineTransform = transform
-            .GetComponentsInChildren<Transform>()
-            .Single(t => t.name == "mixamorig:Spine");
-
         var spineXZPlane = new Plane(Vector3.up, _spineTransform.position);
-        _cameraToPointerRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var cameraToPointerRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         
-        if (spineXZPlane.Raycast(_cameraToPointerRay, out float cameraToPointerDistance))
+        if (spineXZPlane.Raycast(cameraToPointerRay, out float cameraToPointerDistance))
         {
-            var targetPoint = _cameraToPointerRay.GetPoint(cameraToPointerDistance);
-            _targetRotation = Quaternion.LookRotation(targetPoint - _spineTransform.position);
+            _targetPoint = cameraToPointerRay.GetPoint(cameraToPointerDistance);
+            _targetRotation = Quaternion.LookRotation(_targetPoint - _spineTransform.position);
         }
     }
 
