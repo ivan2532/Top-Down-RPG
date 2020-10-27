@@ -6087,12 +6087,20 @@ PrefabInstance:
       propertyPath: frostboltPoolSize
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3105004441357719965, guid: d7fa0f8c6ec077448b9767c2f7717635, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3105004441357719967, guid: d7fa0f8c6ec077448b9767c2f7717635, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3105004441357719967, guid: d7fa0f8c6ec077448b9767c2f7717635, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105004441357719970, guid: d7fa0f8c6ec077448b9767c2f7717635, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
