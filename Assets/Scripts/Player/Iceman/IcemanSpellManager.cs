@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.Player.Iceman
 {
@@ -15,15 +16,21 @@ namespace Assets.Scripts.Player.Iceman
             frostboltPool.InitializePool(frostboltPoolSize, Resources.Load<GameObject>(frostboltPrefabPath), "Frostbolt Pool");
         }
 
-        public static void SpawnFrostbolt(Vector3 spawnPosition, Vector3 targetPoint)
+        public static void SpawnFrostbolt(Vector3 spawnPosition, Ray cameraToPointerRay)
         {
             var frostbolt = frostboltPool.GetNextObjectFromPool();
             var frostboltTransform = frostbolt.transform;
 
-            frostboltTransform.position = spawnPosition;
-            frostboltTransform.rotation = Quaternion.LookRotation(targetPoint - spawnPosition);
+            var spineXZPlane = new Plane(Vector3.up, spawnPosition);
+            if (spineXZPlane.Raycast(cameraToPointerRay, out float distanceToPlane))
+            {
+                var targetPoint = cameraToPointerRay.GetPoint(distanceToPlane);
 
-            frostbolt.SetActive(true);
+                frostboltTransform.rotation = Quaternion.LookRotation(targetPoint - spawnPosition);
+                frostboltTransform.position = spawnPosition + frostboltTransform.forward;
+
+                frostbolt.SetActive(true);
+            }
         }
     }
 }
